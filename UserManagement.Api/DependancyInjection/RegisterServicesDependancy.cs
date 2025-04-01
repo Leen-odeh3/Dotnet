@@ -17,7 +17,7 @@ public static class RegisterServicesDependancy
     public static IServiceCollection addDependancy(this IServiceCollection service, IConfiguration config)
     {
         // For Entity Framework
-        service.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(config.GetConnectionString("ConnStr")));
+        service.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(config.GetConnectionString("DefaultConnection")));
         service.Configure<JwtSettings>(config.GetSection("JWT"));
 
 

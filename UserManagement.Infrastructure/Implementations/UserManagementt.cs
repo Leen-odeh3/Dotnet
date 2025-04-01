@@ -84,7 +84,7 @@ public class UserManagementt : IUserManagement
     }
     public async Task<ApiResponse<LoginOtpResponse>> GetOtpByLoginAsync(Login loginModel)
     {
-        var user = await _userManager.FindByNameAsync(loginModel.Username);
+        var user = await _userManager.FindByEmailAsync(loginModel.Email);
         if (user != null)
         {
             await _signInManager.SignOutAsync();
@@ -176,12 +176,15 @@ public class UserManagementt : IUserManagement
             Message = $"Token created"
         };
     }
-    public async Task<ApiResponse<LoginResponse>> LoginUserWithJWTokenAsync(string otp, string userName)
+    public async Task<ApiResponse<LoginResponse>> LoginUserWithJWTokenAsync(string otp, string email)
     {
-        var user = await _userManager.FindByNameAsync(userName);
+        var user = await _userManager.FindByEmailAsync(email);
+        Console.WriteLine(user);
         var signIn = await _signInManager.TwoFactorSignInAsync("Email", otp, false, false);
+        Console.WriteLine(signIn);
         if (signIn.Succeeded)
         {
+            Console.WriteLine(signIn.Succeeded);
             if (user != null)
             {
                 return await GetJwtTokenAsync(user);

@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Web;
 using UserManagement.Core.Abstracts;
@@ -27,7 +26,7 @@ public class AuthenticationController : ControllerBase
         _user = user;
     }
 
-    [HttpPost]
+    [HttpPost("Register")]
     public async Task<IActionResult> Register([FromBody] Register registerUser)
     {
         var tokenResponse = await _user.CreateUserWithTokenAsync(registerUser);
@@ -97,14 +96,14 @@ public class AuthenticationController : ControllerBase
     [Route("login-2FA")]
     public async Task<IActionResult> LoginWithOTP(LoginWithOTP loginWithOTP)
     {
-        var jwt = await _user.LoginUserWithJWTokenAsync(loginWithOTP.Code, loginWithOTP.Username);
+        var jwt = await _user.LoginUserWithJWTokenAsync(loginWithOTP.Code, loginWithOTP.Email);
         if (jwt.IsSuccess)
         {
             return Ok(jwt);
 
         }
         return StatusCode(StatusCodes.Status404NotFound,
-            new Response { Status = "Success", Message = $"Invalid Code" });
+            new Response { Status = "Not Success", Message = $"Invalid Code" });
     }
 
     [HttpPost]

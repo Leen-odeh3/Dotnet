@@ -11,14 +11,14 @@ using UserManagement.Core.DTOs.General;
 using UserManagement.Core.Models;
 
 namespace UserManagement.Infrastructure.Implementations;
-public class UserManagement : IUserManagement
+public class UserManagementt : IUserManagement
 {
     private readonly UserManager<ApplicationUser> _userManager;
     private readonly SignInManager<ApplicationUser> _signInManager;
     private readonly RoleManager<IdentityRole> _roleManager;
     private readonly IConfiguration _configuration;
 
-    public UserManagement(UserManager<ApplicationUser> userManager,
+    public UserManagementt(UserManager<ApplicationUser> userManager,
         RoleManager<IdentityRole> roleManager,
         SignInManager<ApplicationUser> signInManager, IConfiguration configuration)
     {

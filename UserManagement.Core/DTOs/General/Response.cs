@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace UserManagement.Core.DTOs.General
+﻿namespace UserManagement.Core.DTOs.General;
+public class Response
 {
-    internal class Response
-    {
-    }
+
+    public string? Status { get; set; }
+    public string? Message { get; set; }
+    public bool IsSuccess { get; set; }
 }

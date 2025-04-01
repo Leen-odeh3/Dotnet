@@ -12,4 +12,5 @@ public class Register
 
     [Required(ErrorMessage = "Password is required")]
     public string? Password { get; set; }
+    public List<string>? Roles { get; set; }
 }
